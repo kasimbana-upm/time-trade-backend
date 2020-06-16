@@ -1,15 +1,18 @@
 languaje: node_js
 node_js:
-- stable
+  - stable
+branches:
+  - develop
+  - master
 cache:
   directories:
   - node_modules
 script:
-- npm test
+  - npm test
+  - npm run build
 deploy:
   provider: heroku
-  api_key:
-    secure: Y3YLRIti69jAXV5R1MJhd161tTAHRvXgnizfdk3EhT588zla/1jnOAmk8nlq+qjtCUBNftyl2kYAfsgHnC0PYCaA9AqBKnKlJf86FDFbzWJtvsOFVpPUL47KySy+aUr6/ToW7Vlezwp+wdjSE2NqgD/0+sz94/nLOt5yD8mq6jHXJt52ixwlST1IEWwkxt+dszyifcZtQRR7tP0VKpTNdOBNzhVWw0G43ZxmC+MXLZnsI/NmBokSKb5VxbN4SxlJFk+ipSmaGtmlXHzC4LP+HUdglFF5nrGMVcyOoNz0rvvs9GW/tnHgcFIUnI51T7IftyfAZK6Z8QljdeavCnx+Pi9yFdAvqYnHnA11laxSPbnaoaggPkdccIMTdS+s+7szCJvNBs7tqnH1jkm5ag9D4pxq1IsNXw7eUO2IDn/OUR91SXE6AGssUsSQ0q220IVUzrZn/HpYrD7q7ltbL+DfN7EWe92Fkc7N+uFIZ3tWnVPCkZ4DvJmxAhbXmZlpfcvE4PhO+/DN4aORDV+OMuhLQl3OA1ZAQnEARtF5meDblTGsXiFByh+rC/+LT6ll10haCigWeMPG5uGTHdO9Zfhik1ZVSz+ryYwDZRk1kul66aftka/WuBhapIcjMRh7+mWy7GVMjYH4Q1XrEV7iZ2NjuN+w1/Ot1Q7jvL9KQZxcDvs=
+  api_key: $HEROKU
   app: time-trade-backend
   on:
     branch: master
