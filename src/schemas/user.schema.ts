@@ -4,7 +4,8 @@ import { Document } from "mongoose";
 @Schema()
 export class User extends Document {
     @Prop({
-        required: true
+        required: true,
+        unique: true
     })
     email: string;
 
