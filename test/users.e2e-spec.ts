@@ -66,6 +66,26 @@ describe('UsersController (e2e)', () => {
         expect(res.body).toMatchObject(newUser);
     });
 
+    it("/users (POST) should return 409 user already exists", () => {
+        const repeatedUser = {
+            email: "repeated@gmail.com",
+            name: Faker.name.firstName(),
+            surname: Faker.name.lastName(),
+            password: Faker.internet.password()
+        };
+
+        const errorResponse = {
+            statusCode: 409,
+            message: "Ya existe un usuario con este email",
+            error: "Conflict"
+        }
+
+        return request(app.getHttpServer())
+            .post(endpoint)
+            .send(repeatedUser)
+            .expect(409, errorResponse);
+    });
+
     async function seedDatabase() {
         const defaultaData = [
             {

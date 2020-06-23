@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseInterceptors } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UserEmailConflictInterceptor } from '../interceptors/user-email-conflict.interceptor';
 
 @Controller('users')
+@UseInterceptors(UserEmailConflictInterceptor)
 export class UsersController {
     constructor(private usersService: UsersService) {}
 
