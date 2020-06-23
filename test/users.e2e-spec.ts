@@ -13,6 +13,8 @@ describe('UsersController (e2e)', () => {
     let app: INestApplication;
     let service: UsersService;
 
+    const endpoint = "/users";
+
     beforeEach(async () => {
         mongod = new MongoMemoryServer();
 
@@ -42,11 +44,26 @@ describe('UsersController (e2e)', () => {
 
     it('/users (GET)', () => {
         return request(app.getHttpServer())
-            .get('/users')
+            .get(endpoint)
             .expect(200)
             .expect((res) => {
                 expect(res.body.length).toBe(2);
             });
+    });
+
+    it("/users (POST)", async () => {
+        const newUser = {
+            email: Faker.internet.email(),
+            name: Faker.name.firstName(),
+            surname: Faker.name.lastName(),
+            password: Faker.internet.password()
+        };
+        
+        const res = await request(app.getHttpServer())
+            .post(endpoint)
+            .send(newUser)
+            .expect(201);
+        expect(res.body).toMatchObject(newUser);
     });
 
     async function seedDatabase() {
